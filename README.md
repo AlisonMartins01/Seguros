@@ -17,8 +17,8 @@ Responsável por:
 
 ### 2. ContratacaoService
 Responsável por:
-- Contratar uma proposta (somente se Aprovada)
-- Armazenar informações da contratação (ID da proposta, data de contratação)
+- Contratar uma proposta (Contratada automaticamente pelo Consumer)
+- Armazenar informações da contratação (ID da proposta, data de contratação, Nome do Cliente, Valor)
 - Consumir eventos via fila (RabbitMQ)
 - Listar todas as contratações
 - Expor API REST
@@ -65,6 +65,7 @@ docker-compose up -d
 3. Acesse:
 
 - PropostaService: [http://localhost:5088/swagger](http://localhost:5088/swagger)
+- ContratacaoService: [http://localhost:5089/swagger](http://localhost:5088/swagger)
 - RabbitMQ: [http://localhost:15672](http://localhost:15672) (user: `guest`, pass: `guest`)
 
 ---

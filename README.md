@@ -121,7 +121,7 @@ Os testes cobrem a criação de propostas via API REST utilizando `WebApplicatio
 
 ## 🗺️ Diagrama da Arquitetura 
 
-O arquivo esta na raiz nomeado como diagrama-completo.excalidraw
+(https://excalidraw.com/#json=Llf7b_WGxLmUY1BHHI69H,ctXdWQ-TtRgqTdvc6KPGLg)
 
 ---
 

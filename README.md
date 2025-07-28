@@ -60,6 +60,10 @@ cd seguros
 
 ```bash
 docker-compose up -d
+
+docker-compose logs -f
+
+docker-compose ps
 ```
 
 3. Acesse:

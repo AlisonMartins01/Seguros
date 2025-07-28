@@ -119,14 +119,9 @@ Os testes cobrem a criação de propostas via API REST utilizando `WebApplicatio
 
 ---
 
-## 🗺️ Diagrama da Arquitetura (simplificado)
+## 🗺️ Diagrama da Arquitetura 
 
-```
-+-------------------+             +-----------------------+
-|  PropostaService  |---fila--->  |  ContratacaoService   |
-| (API REST)        |             | (Consumer + Storage)  |
-+-------------------+             +-----------------------+
-```
+O arquivo esta na raiz nomeado como diagrama-completo.excalidraw
 
 ---
 

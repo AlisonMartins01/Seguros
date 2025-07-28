@@ -1,0 +1,71 @@
+services:
+
+  proposta.api:
+    container_name: seguros-proposta.api
+    build:
+      dockerfile: src/PropostaServices.API/Dockerfile
+    depends_on:
+      - sqlserver
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__SqlServer=Server=sqlserver,1433;Database=SegurosDb;User ID=sa;Password=S3gur0!@123;TrustServerCertificate=True;Encrypt=False
+      - ASPNETCORE_URLS=http://+:8080
+    ports:
+      - "5088:8080"
+    networks:
+      - microservices-net
+
+  contratacao.api:
+   container_name: seguros-contratacao.api
+   build:
+      context: .
+      dockerfile: src/ContratacaoService.API/Dockerfile
+   depends_on:
+      - sqlserver
+   restart: always
+   environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__SqlServer=Server=sqlserver,1433;Database=SegurosDb;User ID=sa;Password=S3gur0!@123;TrustServerCertificate=True;Encrypt=False
+      - ASPNETCORE_URLS=http://+:8080
+   ports:
+      - "5089:8080"
+   networks:
+      - microservices-net
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=S3gur0!@123
+      - MSSQL_PID=Express
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssql-data:/var/opt/mssql
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'S3gur0!@123' -Q 'SELECT 1' || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 15
+    networks:
+      - microservices-net
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    networks:
+      - microservices-net
+volumes:
+  mssql-data:
+    driver: local
+
+networks:
+  microservices-net:
